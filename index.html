@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>social-card</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gyronorm.js/2.0.1/gyronorm.min.js"></script>
+
+  <style>
+      body {
+      margin: 0;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(49deg, black,  purple, rgb(127, 127, 255), red, green);
+      background-size: 400% 400%;
+      animation: gradientAnimation 10s ease infinite;
+    }
+
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+
+    }
+
+    .glass-card {
+        width: 440px;
+        height: 460px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      color: #fff;
+    }
+
+    img {
+      max-width: 122px;
+      border-radius: 50%;
+      perspective: 4000px;
+      transform-style: preserve-3d;
+      transform: translateZ(50px);
+    }
+    p.tilt-effect{
+        font-family:cursive;
+        font-size: 16px;
+
+    }
+    .list tilt-effect ul {
+     list-style: none;
+     padding: 5px;
+}
+
+.list li {
+  display: inline-block;
+  margin: 0 0px;
+}
+
+.list a i {
+  font-size: 4em;
+  color: #000000;
+  transition: color 0.3s ease;
+}
+
+.list a i:hover {
+  color: rgb(255, 255, 255);
+}
+    .tilt-effect {
+        will-change: transform, transform-origin, filter;
+      perspective: 7000px;
+      transform-style: preserve-3d;
+    }
+
+    p.tilt-effect {
+      perspective: 5000px;
+      transform-style: preserve-3d;
+      transform: translateZ(50px);
+    }
+
+    .list a.tilt-effect {
+      display: inline-block;
+      margin: 0 10px;
+    }
+
+    .list a.tilt-effect:hover {
+        perspective: 2000px;
+      transform-style: preserve-3d;
+      transform: translateZ(50px);
+    }
+  </style>
+</head>
+<body>
+  <div class="glass-card tilt-effect">
+    <img src="img2.webp" alt="Your Image">
+    <p class="tilt-effect">Hello, I am Arsh, a dedicated and ambitious BCA student at Invertis University. My academic journey has equipped me with a strong foundation in computer science and technology, fostering a passion for innovative solutions and cutting-edge developments. Proficient in languages such as HTML, CSS, and JavaScript</p>
+    <div class="list tilt-effect">
+      <ul>
+        <li><a href="https://www.instagram.com/https._.arpit/" class="tilt-effect" id="instagram"><i class="fa-brands fa-instagram"></i></a></li>
+        <li><a href="https://www.facebook.com/people/Arpit-Kashyap/pfbid02hPd2ppmFxmf46JrpJCMSgBvGaWABXj4aSXSu5S4D8HhAEjp1VaKvr7rmPFQipvuSl/" class="tilt-effect" id="facebook"><i class="fa-brands fa-facebook"></i></a></li>
+        <li><a href="https://github.com/arpitkumar090" class="tilt-effect" id="github"><i class="fa-brands fa-github"></i></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Initialize Tilt.js on the .glass-card element -->
+  <script>
+    VanillaTilt.init(document.querySelector(".tilt-effect"), {
+      max: 25,
+      speed: 400,
+      glare: true,
+      "max-glare": 0.5,
+    });
+
+    // Initialize gyronorm
+    var gn = new GyroNorm();
+
+    // Subscribe to gyroscope events
+    gn.init().then(function () {
+      gn.start(function(data){
+        // Use gyroscope data to manipulate icons
+        var tiltValue = data.do.beta + 90; // You may need to adjust this based on the gyroscope data
+        document.getElementById("instagram").style.transform = `rotate(${tiltValue}deg)`;
+        document.getElementById("facebook").style.transform = `rotate(${tiltValue}deg)`;
+        document.getElementById("github").style.transform = `rotate(${tiltValue}deg)`;
+      });
+    });
+  </script>
+</body>
+</html>

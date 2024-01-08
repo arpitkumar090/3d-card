@@ -35,8 +35,8 @@
     }
 
     .glass-card {
-        width: 440px;
-        height: 460px;
+        width: 480px;
+        height: 500px;
       background: rgba(255, 255, 255, 0.2);
       border-radius: 10px;
       padding: 20px;
@@ -56,7 +56,7 @@
       transform: translateZ(50px);
     }
     p.tilt-effect{
-        font-family:cursive;
+        font-family:sans-serif;
         font-size: 16px;
 
     }
@@ -115,24 +115,18 @@
       </ul>
     </div>
   </div>
-
-  <!-- Initialize Tilt.js on the .glass-card element -->
   <script>
     VanillaTilt.init(document.querySelector(".tilt-effect"), {
       max: 25,
       speed: 400,
       glare: true,
+      gryroscope:true,
       "max-glare": 0.5,
     });
-
-    // Initialize gyronorm
     var gn = new GyroNorm();
-
-    // Subscribe to gyroscope events
     gn.init().then(function () {
       gn.start(function(data){
-        // Use gyroscope data to manipulate icons
-        var tiltValue = data.do.beta + 90; // You may need to adjust this based on the gyroscope data
+        var tiltValue = data.do.beta + 90;
         document.getElementById("instagram").style.transform = `rotate(${tiltValue}deg)`;
         document.getElementById("facebook").style.transform = `rotate(${tiltValue}deg)`;
         document.getElementById("github").style.transform = `rotate(${tiltValue}deg)`;
